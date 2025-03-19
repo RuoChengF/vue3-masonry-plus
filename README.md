@@ -111,3 +111,8 @@ const list = [
 ## License
 
 MIT
+
+
+## keywords
+
+`vue3` `typescript` `waterfall` `masonry` `瀑布流` `懒加载` `图片预览` `响应式` `动画效果`
