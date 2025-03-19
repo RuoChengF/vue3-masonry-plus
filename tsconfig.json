@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "ESNext",
+    "target": "es2016",
+    "lib": ["DOM", "ESNext"],
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "strict": true,
+    "esModuleInterop": true,
+    "incremental": false,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "vitest/importMeta",
+      "vue",
+      "@vue/runtime-core",
+      "@vue/runtime-dom",
+      "vite/client"
+    ],
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "outDir": "dist",
+    "declaration": true,
+  },
+//   "include": ["*", "src/**/*.ts", "src/**/*.js", "src/**/*.vue", "src/**/*.tsx", "src/**/*.d.ts", "src/models/*.ts", "src/types/*.d.ts"],
+  "exclude": ["dist", "node_modules"],
+}
