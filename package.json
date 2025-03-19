@@ -12,6 +12,9 @@
     "scripts": {
         "dev": "vite",
         "build:lib": "cross-env TARGET=npm vite build && vue-tsc --declaration --emitDeclarationOnly && mv dist/lib dist/types",
+        "build:page": "cross-env TARGET=page vite build",
+        "serve": "vite preview",
+        "test": "vitest",
         "typecheck": "vue-tsc --noEmit"
     },
     "dependencies": {

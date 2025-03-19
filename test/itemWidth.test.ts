@@ -1,35 +1,34 @@
+import { describe, expect, it } from "vitest";
+import { getItemWidth } from "../lib/utils/itemWidth";
 
-import { describe, expect, it } from 'vitest'
-import { getItemWidth } from '../lib/utils/itemWidth'
-
-describe('item 的宽度', () => {
-  it('无断点', () => {
+describe("item 的宽度", () => {
+  it("hasAroundGutter 为 true 时的宽度计算", () => {
     const params = {
-      breakpoints: {
-        1200: { rowPerView: 3 },
-        800: { rowPerView: 2 },
-        500: { rowPerView: 1 },
-      },
-      wrapperWidth: 1400,
-      initWidth: 200,
+      columns: 3,
+      wrapperWidth: 1200,
       gutter: 10,
       hasAroundGutter: true,
-    }
-    expect(getItemWidth(params)).toMatchInlineSnapshot('200')
-  })
+    };
+    expect(getItemWidth(params)).toBe(390);
+  });
 
-  it('有断点', () => {
+  it("hasAroundGutter 为 false 时的宽度计算", () => {
     const params = {
-      breakpoints: {
-        1200: { rowPerView: 3 },
-        800: { rowPerView: 2 },
-        500: { rowPerView: 1 },
-      },
-      wrapperWidth: 940,
-      initWidth: 200,
+      columns: 3,
+      wrapperWidth: 1200,
       gutter: 10,
+      hasAroundGutter: false,
+    };
+    expect(getItemWidth(params)).toBe(393.3333333333333);
+  });
+
+  it("不同列数的宽度计算", () => {
+    const params = {
+      columns: 4,
+      wrapperWidth: 1000,
+      gutter: 20,
       hasAroundGutter: true,
-    }
-    expect(getItemWidth(params)).toMatchInlineSnapshot('300')
-  })
-})
+    };
+    expect(getItemWidth(params)).toBe(225);
+  });
+});

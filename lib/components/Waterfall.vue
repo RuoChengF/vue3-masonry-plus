@@ -1,24 +1,24 @@
 <template>
+  <div
+    ref="waterfallWrapper"
+    class="waterfall-list"
+    :style="{ height: `${wrapperHeight}px` }"
+  >
     <div
-        ref="waterfallWrapper"
-        class="waterfall-list"
-        :style="{ height: `${wrapperHeight}px` }"
+      v-for="(item, index) in list"
+      :key="getKey(item, index)"
+      class="waterfall-item"
     >
-        <div
-            v-for="(item, index) in list"
-            :key="getKey(item, index)"
-            class="waterfall-item"
-        >
-            <div class="waterfall-card">
-                <slot
-                    name="item"
-                    :item="item"
-                    :index="index"
-                    :url="getRenderURL(item)"
-                />
-            </div>
-        </div>
+      <div class="waterfall-card">
+        <slot
+          name="item"
+          :item="item"
+          :index="index"
+          :url="getRenderURL(item)"
+        />
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -31,70 +31,70 @@ import { getValue } from "../utils/util";
 import type { ViewCard } from "../types/waterfall";
 
 const props = defineProps({
-    list: {
-        type: Array as PropType<ViewCard[]>,
-        default: () => [],
-    },
-    rowKey: {
-        type: String,
-        default: "id",
-    },
-    imgSelector: {
-        type: String,
-        default: "src",
-    },
-    width: {
-        type: Number,
-        default: 200,
-    },
-    columns: {
-        type: Number,
-        default: 3,
-    },
-    gutter: {
-        type: Number,
-        default: 10,
-    },
-    hasAroundGutter: {
-        type: Boolean,
-        default: true,
-    },
-    animationPrefix: {
-        type: String,
-        default: "animate__animated",
-    },
-    animationEffect: {
-        type: String,
-        default: "fadeIn",
-    },
-    animationDuration: {
-        type: Number,
-        default: 1000,
-    },
-    animationDelay: {
-        type: Number,
-        default: 300,
-    },
-    backgroundColor: {
-        type: String,
-        default: "#fff",
-    },
-    lazyload: {
-        type: Boolean,
-        default: true,
-    },
-    loadProps: {
-        type: Object,
-        default: () => {},
-    },
-    crossOrigin: {
-        type: Boolean,
-        default: true,
-    },
-    delay: {
-        type: Number,
-        default: 300,
-    },
+  list: {
+    type: Array as PropType<any[]>,
+    default: () => [],
+  },
+  rowKey: {
+    type: String,
+    default: "id",
+  },
+  imgSelector: {
+    type: String,
+    default: "src",
+  },
+  width: {
+    type: Number,
+    default: 200,
+  },
+  columns: {
+    type: Number,
+    default: 3,
+  },
+  gutter: {
+    type: Number,
+    default: 10,
+  },
+  hasAroundGutter: {
+    type: Boolean,
+    default: true,
+  },
+  animationPrefix: {
+    type: String,
+    default: "animate__animated",
+  },
+  animationEffect: {
+    type: String,
+    default: "fadeIn",
+  },
+  animationDuration: {
+    type: Number,
+    default: 1000,
+  },
+  animationDelay: {
+    type: Number,
+    default: 300,
+  },
+  backgroundColor: {
+    type: String,
+    default: "#fff",
+  },
+  lazyload: {
+    type: Boolean,
+    default: true,
+  },
+  loadProps: {
+    type: Object,
+    default: () => {},
+  },
+  crossOrigin: {
+    type: Boolean,
+    default: true,
+  },
+  delay: {
+    type: Number,
+    default: 300,
+  },
 });
 
 const lazy = new Lazy(props.lazyload, props.loadProps, props.crossOrigin);
@@ -102,29 +102,29 @@ provide("lazy", lazy);
 
 // 容器块信息
 const { waterfallWrapper, wrapperWidth, colWidth, cols, offsetX } =
-    useCalculateCols(props);
+  useCalculateCols(props);
 
 // 容器高度，块定位
 const { wrapperHeight, layoutHandle } = useLayout(
-    props,
-    colWidth,
-    cols,
-    offsetX,
-    waterfallWrapper
+  props,
+  colWidth,
+  cols,
+  offsetX,
+  waterfallWrapper
 );
 
 // 1s内最多执行一次排版，减少性能开销
 const renderer = useDebounceFn(() => {
-    layoutHandle();
+  layoutHandle();
 }, props.delay);
 
 // 列表发生变化直接触发排版
 watch(
-    () => [wrapperWidth, colWidth, props.list],
-    () => {
-        renderer();
-    },
-    { deep: true }
+  () => [wrapperWidth, colWidth, props.list],
+  () => {
+    renderer();
+  },
+  { deep: true }
 );
 
 // 尺寸宽度变化防抖触发
@@ -137,60 +137,60 @@ provide("imgLoaded", renderer);
 
 // 根据选择器获取图片地址
 const getRenderURL = (item: ViewCard): string => {
-    return getValue(item, props.imgSelector)[0];
+  return getValue(item, props.imgSelector)[0];
 };
 
 // 获取唯一值
 const getKey = (item: ViewCard, index: number): string => {
-    return item[props.rowKey] || index;
+  return item[props.rowKey] || index;
 };
 
 defineExpose({
-    waterfallWrapper,
-    wrapperHeight,
-    getRenderURL,
-    getKey,
-    list: props.list,
-    backgroundColor: props.backgroundColor,
+  waterfallWrapper,
+  wrapperHeight,
+  getRenderURL,
+  getKey,
+  list: props.list,
+  backgroundColor: props.backgroundColor,
 });
 </script>
 
 <style scoped>
 .waterfall-list {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    background-color: v-bind(backgroundColor);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: v-bind(backgroundColor);
 }
 .waterfall-item {
-    position: absolute;
-    left: 0;
-    top: 0;
-    /* transition: .3s; */
-    /* 初始位置设置到屏幕以外，避免懒加载失败 */
-    transform: translate3d(0, 3000px, 0);
-    visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* transition: .3s; */
+  /* 初始位置设置到屏幕以外，避免懒加载失败 */
+  transform: translate3d(0, 3000px, 0);
+  visibility: hidden;
 }
 
 /* 初始的入场效果 */
 @-webkit-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .fadeIn {
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }
 </style>
