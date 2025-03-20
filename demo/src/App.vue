@@ -26,6 +26,7 @@
                 :url="item.url"
                 :previewSrcList="[item.url]"
                 :previewIcon="previewIcon"
+                :hideOnClickModal="true"
               />
               <!-- <div class="overlay">
                             <span class="zoom-icon">🔍</span>

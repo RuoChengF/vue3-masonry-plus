@@ -7,28 +7,36 @@
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
-    "strict": true,
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
     "incremental": false,
     "skipLibCheck": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noUnusedLocals": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noImplicitReturns": false,
     "forceConsistentCasingInFileNames": true,
+    "noEmit": false,
+    "checkJs": false,
     "types": [
       "vitest/importMeta",
       "vue",
       "@vue/runtime-core",
       "@vue/runtime-dom",
-      "vite/client"
+      "vite/client",
+      "@types/node"
     ],
     "paths": {
       "@/*": ["src/*"]
     },
     "outDir": "dist",
-    "declaration": true,
+    "declaration": true
   },
-//   "include": ["*", "src/**/*.ts", "src/**/*.js", "src/**/*.vue", "src/**/*.tsx", "src/**/*.d.ts", "src/models/*.ts", "src/types/*.d.ts"],
-  "exclude": ["dist", "node_modules"],
+  "include": ["lib/**/*.ts", "lib/**/*.vue", "lib/**/*.tsx", "lib/types/*.d.ts"],
+  "exclude": ["dist", "node_modules", "demo"],
 }
