@@ -98,6 +98,7 @@ const list = [
 | errorImg | String | - | 加载失败显示的图片地址 |
 | previewSrcList | Array | [] | 开启图片预览功能的图片列表 |
 | previewIcon | String | '' | 自定义预览图标的图片地址 |
+| hideOnClickModal | Boolean | false | 是否可以通过点击遮罩层关闭预览 |
 
 ## 插槽
 
