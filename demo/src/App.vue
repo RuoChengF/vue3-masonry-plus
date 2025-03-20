@@ -8,6 +8,9 @@
         <span v-else class="loading-spinner"></span>
       </button>
       <button @click="forceUpdate">强制更新</button>
+      <button @click="clearAndReload" class="clear-reload-btn">
+        清空并重新加载
+      </button>
     </div>
     <div v-infinite-scroll="loadMore">
       <Waterfall
@@ -124,6 +127,15 @@ const waterfall = ref<any>(null);
 const forceUpdate = () => {
   waterfall.value.renderer();
 };
+
+/**
+ * 清空并重新加载数据
+ * 通过调用瀑布流组件的clearAndReload方法来清空当前数据并重新加载
+ * 适用于需要完全重置瀑布流状态的场景，如切换数据源或重新排序
+ */
+const clearAndReload = () => {
+  waterfall.value.clearAndReload();
+};
 const addItems = async () => {
   loading.value = true;
 
@@ -193,6 +205,24 @@ const loadMore = _.debounce(
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+}
+
+.clear-reload-btn {
+  margin-left: 10px;
+  padding: 12px 24px;
+  background-color: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.clear-reload-btn:hover {
+  background-color: #ff6b81;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .loading-spinner {

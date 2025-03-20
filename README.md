@@ -71,7 +71,12 @@ const list = [
 const forceUpdate = () => {
   waterfallRef.value?.renderer()
 }
- 
+
+// 清空并重新加载数据
+const clearAndReload = () => {
+  waterfallRef.value?.clearAndReload()
+}
+
 </script>
 ```
 
@@ -116,6 +121,16 @@ const forceUpdate = () => {
 | 插槽名 | 说明 | 作用域参数 |
 |--------|------|------------|
 | item | 自定义列表项内容 | { item: 列表项数据, index: 索引, url: 图片地址 } |
+
+## 事件
+### Waterfall 组件
+
+| 方法名 | 说明 | 参数 |
+|--------|------|------|
+| renderer | 强制更新瀑布流布局，用于在数据变化后手动触发重新计算和渲染 | 无 |
+| clearAndReload | 清空当前数据并重新加载渲染，用于解决特定场景下的布局问题 | 无 |
+
+ 
 
 ## 注意事项
 

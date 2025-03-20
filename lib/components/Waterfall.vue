@@ -146,6 +146,15 @@ const getKey = (item: ViewCard, index: number): string => {
   return item[props.rowKey] || index;
 };
 
+const clearAndReload = () => {
+  const originalList = [...props.list];
+  props.list.length = 0;
+  setTimeout(() => {
+    props.list.push(...originalList);
+    renderer();
+  }, 0);
+};
+
 defineExpose({
   waterfallWrapper,
   wrapperHeight,
@@ -154,6 +163,7 @@ defineExpose({
   list: props.list,
   backgroundColor: props.backgroundColor,
   renderer,
+  clearAndReload,
 });
 </script>
 
