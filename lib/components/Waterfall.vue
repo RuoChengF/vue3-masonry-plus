@@ -116,6 +116,7 @@ const { wrapperHeight, layoutHandle } = useLayout(
 // 1s内最多执行一次排版，减少性能开销
 const renderer = useDebounceFn(() => {
   layoutHandle();
+  //   console.log("强制更新排版");
 }, props.delay);
 
 // 列表发生变化直接触发排版
@@ -152,6 +153,7 @@ defineExpose({
   getKey,
   list: props.list,
   backgroundColor: props.backgroundColor,
+  renderer,
 });
 </script>
 

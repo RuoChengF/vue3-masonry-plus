@@ -4,11 +4,14 @@
     <div class="controls">
       <button @click="addItems" :disabled="loading" class="load-more-btn">
         <span v-if="!loading">加载更多</span>
+
         <span v-else class="loading-spinner"></span>
       </button>
+      <button @click="forceUpdate">强制更新</button>
     </div>
     <div v-infinite-scroll="loadMore">
       <Waterfall
+        ref="waterfall"
         :list="imageList"
         :width="300"
         :gutter="16"
@@ -112,7 +115,15 @@ const baseImages: ImageItem[] = [
 
 const imageList = ref<ImageItem[]>(baseImages);
 const loading = ref(false);
-
+const waterfall = ref<any>(null);
+/**
+ * 强制更新瀑布流布局
+ * 通过调用瀑布流组件的renderer方法来重新计算和更新布局
+ * 在图片加载完成或需要手动更新布局时调用
+ */
+const forceUpdate = () => {
+  waterfall.value.renderer();
+};
 const addItems = async () => {
   loading.value = true;
 

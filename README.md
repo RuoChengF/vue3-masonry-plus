@@ -34,6 +34,7 @@ yarn add vue3-masonry-plus
 ```vue
 <template>
   <Waterfall
+    ref="waterfallRef"
     :list="list"
     :width="200"
     :columns="4"
@@ -56,13 +57,21 @@ yarn add vue3-masonry-plus
 
 <script setup lang="ts">
 import { Waterfall, LazyImg } from 'vue3-masonry-plus'
+import { ref } from 'vue'
 
+const waterfallRef = ref()
 const previewIcon = 'path/to/preview-icon.png' // 自定义预览图标
 const list = [
   { id: '1', src: 'image1.jpg', name: 'Image 1' },
   { id: '2', src: 'image2.jpg', name: 'Image 2' },
   // ...
 ]
+
+// 强制更新瀑布流布局
+const forceUpdate = () => {
+  waterfallRef.value?.renderer()
+}
+ 
 </script>
 ```
 
