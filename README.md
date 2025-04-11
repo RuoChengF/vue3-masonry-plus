@@ -4,7 +4,7 @@
 一个基于Vue3的瀑布流组件，支持PC和移动端，支持animate动画效果，内置图片懒加载功能。
 
 ## 预览
-![项目预览地址](http://www.ruocheng.site/)
+[项目预览地址](http://www.ruocheng.site/)
 
 ## 运行项目
  ```bash
