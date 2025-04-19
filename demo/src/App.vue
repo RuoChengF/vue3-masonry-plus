@@ -7,7 +7,7 @@
 
         <span v-else class="loading-spinner"></span>
       </button>
-      <button @click="forceUpdate">强制更新</button>
+      <button class="clear-reload-btn" @click="forceUpdate">强制更新</button>
       <button @click="clearAndReload" class="clear-reload-btn">
         清空并重新加载
       </button>
@@ -76,7 +76,9 @@ interface ImageItem {
 const baseImages: ImageItem[] = [
   {
     id: 1,
-    url: "https://picsum.photos/300/400",
+    url: `https://picsum.photos/id/${
+      Math.floor(Math.random() * 1000) + 100
+    }/300/400`,
     title: "自然风光",
     description: "壮丽的山川河流，展现大自然的鬼斧神工",
     likes: 128,
@@ -84,7 +86,9 @@ const baseImages: ImageItem[] = [
   },
   {
     id: 2,
-    url: "https://picsum.photos/300/500",
+    url: `https://picsum.photos/id/${
+      Math.floor(Math.random() * 1000) + 100
+    }/300/500`,
     title: "城市风景",
     description: "现代都市的繁华与活力",
     likes: 245,
@@ -92,7 +96,9 @@ const baseImages: ImageItem[] = [
   },
   {
     id: 3,
-    url: "https://picsum.photos/300/450",
+    url: `https://picsum.photos/id/${
+      Math.floor(Math.random() * 1000) + 100
+    }/300/450`,
     title: "花卉特写",
     description: "绚丽多彩的花朵，展现生命的美好",
     likes: 167,
@@ -100,7 +106,9 @@ const baseImages: ImageItem[] = [
   },
   {
     id: 4,
-    url: "https://picsum.photos/300/350",
+    url: `https://picsum.photos/id/${
+      Math.floor(Math.random() * 1000) + 100
+    }/300/350`,
     title: "海洋世界",
     description: "神秘浩瀚的海洋，孕育着无限生机",
     likes: 198,
@@ -108,7 +116,9 @@ const baseImages: ImageItem[] = [
   },
   {
     id: 5,
-    url: "https://picsum.photos/300/600",
+    url: `https://picsum.photos/id/${
+      Math.floor(Math.random() * 1000) + 100
+    }/300/600`,
     title: "动物世界",
     description: "可爱有趣的动物们，带来欢乐与温暖",
     likes: 312,
