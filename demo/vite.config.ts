@@ -6,10 +6,6 @@ export default defineConfig({
   plugins: [vue(), dts()],
   build: {
     outDir: "dist",
-    lib: {
-      entry: "src/main.ts",
-      formats: ["es"],
-    },
   },
   server: {
     host: true,
